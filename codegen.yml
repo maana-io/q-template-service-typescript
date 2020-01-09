@@ -1,6 +1,7 @@
 generates:
   ./src/schemas/gen-types.ts:
     schema:
+      - src/schemas/info.ts
       - src/schemas/person.ts
     plugins:
       - typescript
