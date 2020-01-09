@@ -7,7 +7,7 @@
   "main": "dist/main.js",
   "repository": "git@github.com:maana-io/q-template-service-node-ts-basic",
   "scripts": {
-    "prepublish": "npm run generate && npm run build",
+    "prepare": "npm run generate && npm run build",
     "test": "jest",
     "build": "tsc",
     "startdev": "tsc-watch --onSuccess \"node ./dist/main.js\"",
@@ -18,17 +18,15 @@
   "dependencies": {
     "apollo-server": "2.9.15",
     "dotenv": "8.2.0",
-    "graphql": "14.4.2",
+    "graphql": "14.5.8",
     "uuid": "3.3.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.6.1",
     "@graphql-codegen/typescript": "^1.6.1",
     "@graphql-codegen/typescript-resolvers": "^1.6.1",
-    "@types/dotenv": "^6.1.1",
-    "@types/graphql": "^14.2.2",
     "@types/jest": "24.0.18",
-    "@types/uuid": "^3.4.5",
+    "@types/uuid": "3.4.5",
     "core-js": "3.2.1",
     "jest": "24.9.0",
     "prettier": "1.18.2",
