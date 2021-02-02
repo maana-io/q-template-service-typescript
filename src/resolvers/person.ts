@@ -6,13 +6,13 @@ import {
   QueryResolvers,
   ResolverTypeWrapper,
   SubscriptionObject,
-  SubscriptionResolvers
+  SubscriptionResolvers,
 } from "../schemas/gen-types";
 
 import { Context } from "../main";
 import { Person } from "../model/person";
 import pubsub from "../pubsub";
-import uuid from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * graphql-code-gen generates resolvers for each Type in the GraphQL schema.
@@ -47,7 +47,7 @@ export const PersonResolver: Resolvers = {
         return new Date().getFullYear() - person.dateOfBirth.getFullYear();
       }
       return null;
-    }
+    },
   },
   PersonEvent: {
     dateOfBirth(person) {
@@ -57,7 +57,7 @@ export const PersonResolver: Resolvers = {
         return fullTime.substring(0, indexOfT);
       }
       return null;
-    }
+    },
   },
   Query: {
     allPeople: () => {
@@ -65,12 +65,12 @@ export const PersonResolver: Resolvers = {
     },
     person: (root, { id }) => {
       return people[id];
-    }
+    },
   },
   Mutation: {
     addPerson: (root, { input }, ctx) => {
       if (!input) return null;
-      const id = input.id ? input.id : uuid.v4();
+      const id = input.id ? input.id : uuidv4();
 
       console.log(typeof input.dateOfBirth);
 
@@ -79,7 +79,7 @@ export const PersonResolver: Resolvers = {
         name: input.name !== undefined ? input.name : null,
         givenName: input.givenName !== undefined ? input.givenName : null,
         familyName: input.familyName !== undefined ? input.familyName : null,
-        dateOfBirth: input.dateOfBirth ? new Date(input.dateOfBirth) : null
+        dateOfBirth: input.dateOfBirth ? new Date(input.dateOfBirth) : null,
       });
 
       pubsub.publish("personAdded", { personAdded: people[id] });
@@ -98,7 +98,7 @@ export const PersonResolver: Resolvers = {
         givenName: input.givenName !== undefined ? input.givenName : person.givenName,
         familyName: input.familyName !== undefined ? input.familyName : person.familyName,
         dateOfBirth:
-          input.dateOfBirth !== undefined ? new Date(input.dateOfBirth) : person.dateOfBirth
+          input.dateOfBirth !== undefined ? new Date(input.dateOfBirth) : person.dateOfBirth,
       });
 
       people[updatedPerson.id] = updatedPerson;
@@ -111,17 +111,17 @@ export const PersonResolver: Resolvers = {
       delete people[id];
       pubsub.publish("personDeleted", { personDeleted: person });
       return person;
-    }
+    },
   },
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncIterator("personAdded")
+      subscribe: () => pubsub.asyncIterator("personAdded"),
     },
     personUpdated: {
-      subscribe: () => pubsub.asyncIterator("personUpdated")
+      subscribe: () => pubsub.asyncIterator("personUpdated"),
     },
     personDeleted: {
-      subscribe: () => pubsub.asyncIterator("personDeleted")
-    }
-  }
+      subscribe: () => pubsub.asyncIterator("personDeleted"),
+    },
+  },
 };
