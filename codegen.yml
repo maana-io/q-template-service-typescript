@@ -11,5 +11,6 @@ generates:
       noSchemaStitching: false
       contextType: ../main#Context
       showUnusedMappers: true
+      mapperTypeSuffix: FromModel
       mappers:
         Person: ../model/person#Person
