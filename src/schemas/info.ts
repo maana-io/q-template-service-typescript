@@ -4,6 +4,7 @@ export default gql`
   # Boilerplate
   type Info {
     id: ID!
+    version: String!
     name: String!
     description: String
   }

@@ -18,9 +18,10 @@ export const InfoResolver: Resolvers = {
     info: () => {
       return {
         id: environment.serviceId,
+        version: environment.version,
         name: environment.serviceId,
-        description: "Maana Q Knowledge Service template"
+        description: "Maana Q Knowledge Service template",
       };
-    }
-  }
+    },
+  },
 };
