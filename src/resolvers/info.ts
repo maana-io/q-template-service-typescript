@@ -1,5 +1,5 @@
-import { QueryResolvers } from "../schemas/gen-types";
 import { environment } from "../environment";
+import { QueryResolvers } from "../schemas/gen-types";
 
 /**
  * graphql-code-gen generates resolvers for each Type in the GraphQL schema.

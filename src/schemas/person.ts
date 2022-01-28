@@ -47,12 +47,4 @@ export default gql`
     familyName: String
     dateOfBirth: Date
   }
-
-  # Subscription Root
-  type Subscription {
-    # Custom events
-    personAdded: PersonEvent!
-    personUpdated: PersonEvent!
-    personDeleted: PersonEvent!
-  }
 `;

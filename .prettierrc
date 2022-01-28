@@ -1,5 +1,6 @@
 {
     "printWidth": 100,
     "parser": "typescript",
-    "endOfLine": "lf"
+    "endOfLine": "lf",
+    "singleQuote": false
 }
