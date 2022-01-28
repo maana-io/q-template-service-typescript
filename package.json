@@ -7,7 +7,8 @@
   "main": "dist/main.js",
   "repository": "git@github.com:maana-io/q-template-service-node-ts-basic",
   "scripts": {
-    "postinstall": "npm run build",
+    "docker-build": "docker build -t maana-service .",
+    "docker-run": "docker run -p 8050:8050 maana-service",
     "test": "jest",
     "build": "npm run generate && tsc",
     "start": "node ./dist/main.js",

@@ -1,12 +1,14 @@
-FROM node:10.15.3-alpine
+FROM node:14-alpine
 WORKDIR /usr/app/template-service
+COPY ./package*.json /usr/app/template-service
+
+RUN npm install
+
 COPY . /usr/app/template-service
+RUN npm run build
+RUN rm -rf node_modules src
 
-RUN npm install && \
-  npm run build && \
-  rm -rf node_modules src
-
-FROM node:10.15.3-alpine
+FROM node:14-alpine
 WORKDIR /usr/app/template-service
 COPY --from=0 /usr/app/template-service .
 
