@@ -1,13 +1,13 @@
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
-import { Person } from "../model/person";
+import { Person } from '../model/person';
 import {
   MutationResolvers,
   PersonEvent,
   PersonEventResolvers,
   PersonResolvers,
   QueryResolvers,
-} from "../schemas/gen-types";
+} from '../schemas/gen-types';
 
 /**
  * graphql-code-gen generates resolvers for each Type in the GraphQL schema.
@@ -31,7 +31,7 @@ export const PersonResolver: Resolvers = {
     dateOfBirth(person) {
       if (person && person.dateOfBirth) {
         const fullTime = person.dateOfBirth.toISOString();
-        const indexOfT = fullTime.indexOf("T");
+        const indexOfT = fullTime.indexOf('T');
         return fullTime.substring(0, indexOfT);
       }
       return null;
@@ -47,7 +47,7 @@ export const PersonResolver: Resolvers = {
     dateOfBirth(person) {
       if (person && person.dateOfBirth) {
         const fullTime = person.dateOfBirth.toISOString();
-        const indexOfT = fullTime.indexOf("T");
+        const indexOfT = fullTime.indexOf('T');
         return fullTime.substring(0, indexOfT);
       }
       return null;

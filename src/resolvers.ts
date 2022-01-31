@@ -1,11 +1,11 @@
-import { InfoResolver } from "./resolvers/info";
-import { PersonResolver } from "./resolvers/person";
+import { InfoResolver } from './resolvers/info';
+import { PersonResolver } from './resolvers/person';
 import {
   MutationResolvers,
   PersonEventResolvers,
   PersonResolvers,
   QueryResolvers,
-} from "./schemas/gen-types";
+} from './schemas/gen-types';
 
 /**
  * Aggregates the resolvers defined by graphql-code-gen from our GraphQL schema.

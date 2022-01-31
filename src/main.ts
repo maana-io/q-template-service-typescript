@@ -1,11 +1,11 @@
-import { ApolloServer } from "apollo-server";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import { GraphQLError, GraphQLFormattedError } from "graphql";
+import { ApolloServer } from 'apollo-server';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
-import { environment } from "./environment";
-import { resolvers } from "./resolvers";
-import infoSchema from "./schemas/info";
-import personSchema from "./schemas/person";
+import { environment } from './environment';
+import { resolvers } from './resolvers';
+import infoSchema from './schemas/info';
+import personSchema from './schemas/person';
 
 type Maybe<T> = T | null;
 
