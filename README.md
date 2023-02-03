@@ -88,3 +88,43 @@ Options:
 * Set the number fo pods to spin up, usually you want to start with `1`.
 * Set the port number you setup for your service, the default for the template is `80`.
 * it `Y` to confirm you setup and start building and deploying your service.
+
+## How to convert a Lambda function into a Knowledge Service
+
+Lambda Functions are currently an **experimental feature**, and are not supported in production environments.
+
+If you need to convert a series of Lambda functions to a service in order to improve performance, here is how that is done.
+
+1. Given a Kind and Lambda function like this:
+   - ![Knowledge Graph with Kind and Lambda Function](/docs/images/knowledge-graph-with-lambda-and-kind.png)
+1. And a Lambda code definition like this:
+   - ![Lambda Function definition](docs/images/lambda-code.png)
+
+First you must **update the schema definition** in `src/schemas/person.ts` to include the new query `sayHello`.
+
+Find the line of code that defines the `Query` type and add your function signature:
+
+```graphql
+type Query {
+  # other methods...
+  sayHello(person: Person!): String
+}
+```
+
+Then run `npm run generate` to update the `src/schemas/gen-types.ts` file with your updated query definition (this will fix TypeScript warnings when you add your new resolver to run the code from your lambda function).
+
+Next, go to `src/resolvers/person.ts` to add the resolver for the `sayHello` function.
+
+```ts
+export const PersonResolver: Resolvers = {
+  // ...
+  Query: {
+    // ...
+    sayHello: (root, { person } /* <-- these are the function inputs from the function graph in Q */) => {
+      return `Hello, ${person.name}!`;
+    }
+  }
+}
+```
+
+And that's it! You should now be able to execute the query `sayHello` against this service.
