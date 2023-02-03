@@ -1,6 +1,6 @@
-import { ApolloServer } from 'apollo-server';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { ApolloServer, ApolloServerPlugin, BaseContext } from '@apollo/server';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { startStandaloneServer } from '@apollo/server/standalone';
 
 import { environment } from './environment';
 import { resolvers } from './resolvers';
@@ -11,19 +11,13 @@ type Maybe<T> = T | null;
 
 export interface Context {}
 
-function formatError(error: GraphQLError): GraphQLFormattedError {
-  console.error(`[ERROR] ${JSON.stringify(error)}`);
+function formatError(formattedError: GraphQLFormattedError): GraphQLFormattedError {
+  console.error(`[ERROR] ${JSON.stringify(formattedError)}`);
   return {
-    message: error.message,
-    locations: error.locations,
-    path: error.path,
+    message: formattedError.message,
+    locations: formattedError.locations,
+    path: formattedError.path,
   };
-}
-
-let plugins = [];
-
-if (environment.apollo.playground) {
-  plugins.push(ApolloServerPluginLandingPageGraphQLPlayground);
 }
 
 const server = new ApolloServer({
@@ -31,7 +25,10 @@ const server = new ApolloServer({
   typeDefs: [personSchema, infoSchema],
   introspection: environment.apollo.introspection,
   formatError,
-  plugins,
 });
 
-server.listen(environment.port).then(({ url }) => console.log(`Server ready at ${url}. `));
+startStandaloneServer(server, {
+  listen: {
+    port: Number(environment.port) || 8050,
+  },
+}).then(({ url }) => console.log(`Server ready at ${url}. `));
