@@ -1,13 +1,11 @@
+import { InfoResolver } from './resolvers/info';
+import { PersonResolver } from './resolvers/person';
 import {
   MutationResolvers,
   PersonEventResolvers,
   PersonResolvers,
   QueryResolvers,
-  SubscriptionResolvers
-} from "./schemas/gen-types";
-
-import { InfoResolver } from "./resolvers/info";
-import { PersonResolver } from "./resolvers/person";
+} from './schemas/gen-types';
 
 /**
  * Aggregates the resolvers defined by graphql-code-gen from our GraphQL schema.
@@ -20,7 +18,6 @@ interface Resolvers {
   PersonEvent: PersonEventResolvers;
   Query: QueryResolvers;
   Mutation: MutationResolvers;
-  Subscription: SubscriptionResolvers;
 }
 
 /**
@@ -31,12 +28,9 @@ export const resolvers: Resolvers = {
   PersonEvent: { ...PersonResolver.PersonEvent },
   Query: {
     ...InfoResolver.Query,
-    ...PersonResolver.Query
+    ...PersonResolver.Query,
   },
   Mutation: {
-    ...PersonResolver.Mutation
+    ...PersonResolver.Mutation,
   },
-  Subscription: {
-    ...PersonResolver.Subscription
-  }
 };

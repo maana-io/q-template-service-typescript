@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import gql from 'graphql-tag';
 
 export default gql`
   # Scalars
@@ -46,13 +46,5 @@ export default gql`
     givenName: String
     familyName: String
     dateOfBirth: Date
-  }
-
-  # Subscription Root
-  type Subscription {
-    # Custom events
-    personAdded: PersonEvent!
-    personUpdated: PersonEvent!
-    personDeleted: PersonEvent!
   }
 `;

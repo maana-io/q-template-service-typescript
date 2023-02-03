@@ -1,5 +1,14 @@
 {
+    "arrowParens": "avoid",
+    "bracketSameLine": true,
+    "bracketSpacing": true,
+    "endOfLine": "lf",
     "printWidth": 100,
-    "parser": "typescript",
-    "endOfLine": "lf"
-}
+    "proseWrap": "always",
+    "quoteProps": "as-needed",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false
+  }
